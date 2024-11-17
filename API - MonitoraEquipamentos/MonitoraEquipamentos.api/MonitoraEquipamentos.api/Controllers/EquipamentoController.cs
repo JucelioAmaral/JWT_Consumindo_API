@@ -21,15 +21,16 @@ namespace MonitoraEquipamentos.api.Controllers
 
         [Authorize("Bearer")]        
         [HttpGet("BuscaEquipamentosStatus")]
-        public object GetEquipamento()
+        public object GetBuscaEquipamentosStatus()
         {
+            //Busca todos os equipamentos para o serviço windows/console/windows form
             try
             {
-                return new
-                {
-                    Teste = "teste GetEquipamento",
-                    Teste2 = "Teste2 GetEquipamento 2"
-                };
+                var equip = _equipService.GetAllEquipamentos().Result;
+                if (equip == null) return null;
+
+                return equip;
+
             }
             catch (Exception ex)
             {
