@@ -22,4 +22,5 @@ git clone https://github.com/JucelioAmaral/JWT_Consumindo_API.git
 4. Executar o script em anexo.
 
 **API roda na porta 5001 e pode ser testada pelo link: https://localhost:5001/swagger/index.html**
+**Para teste apontar para http://localhost:3000/api/**
 

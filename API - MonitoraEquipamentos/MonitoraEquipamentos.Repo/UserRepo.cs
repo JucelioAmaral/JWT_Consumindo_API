@@ -45,5 +45,20 @@ namespace MonitoraEquipamentos.Repo
                 return user;
             }
         }
+
+
+        public User SelectUserAutenticacao(string userid)
+        {
+            IDbConnection conn = _context.GetConnection();
+
+            using (conn)
+            {
+                conn.Open();
+                string query = @"SELECT * FROM Users WHERE UserID = @userid";                
+                return conn.QueryFirstOrDefault<User>
+                    (sql: query, param: new { userid });
+                 
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MonitoraEquipamentos.Application.Contract;
 using System;
@@ -8,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace MonitoraEquipamentos.api.Controllers
 {
-    public class EquipamentoController : ControllerBase
+    [Route("api/[controller]")]
+    public class EquipamentoController : Controller
     {
         private readonly IEquipamentoService _equipService;
 
@@ -17,6 +19,24 @@ namespace MonitoraEquipamentos.api.Controllers
             _equipService = anuncioService;
         }
 
+        [Authorize("Bearer")]        
+        [HttpGet("BuscaEquipamentosStatus")]
+        public object GetEquipamento()
+        {
+            try
+            {
+                return new
+                {
+                    Teste = "teste GetEquipamento",
+                    Teste2 = "Teste2 GetEquipamento 2"
+                };
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar buscar Equipamentos. Erro: {ex.Message}");
+            }
+        }
 
         [HttpGet("BuscaEquipamentos")]
         public async Task<IActionResult> BuscaEquipamentos()
@@ -31,7 +51,7 @@ namespace MonitoraEquipamentos.api.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar buscar anuncio. Erro: {ex.Message}");
+                    $"Erro ao tentar buscar Equipamentos. Erro: {ex.Message}");
             }
         }
     }
