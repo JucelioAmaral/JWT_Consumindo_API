@@ -14,6 +14,11 @@ https://renatogroffe.medium.com/net-core-2-0-jwt-consumindo-uma-api-que-utiliza-
 
 git clone https://github.com/JucelioAmaral/JWT_Consumindo_API.git
 
+## Como configurar O serviço windows?
+
+1. Em "ProjectInstaller.cs", abrir as propriedades de "serviceProcessInstaller1" e alterar o "Account" para "LocalService"
+
+
 ## Como configurar a api(Backend)?
 
 1. Abrir a Visual Code ou Studio;
