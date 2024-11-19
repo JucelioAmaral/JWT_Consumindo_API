@@ -6,6 +6,7 @@ using System.Reflection;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using static SRV_ConsomeAPI.Eventlog.NivelEnums;
 
 namespace SRV_ConsomeAPI.Eventlog
 {
@@ -13,14 +14,18 @@ namespace SRV_ConsomeAPI.Eventlog
 
     public class RegistraLog
     {
-        private static string caminhoExe = string.Empty;
-
-        public static bool Log(string strMensagem, string strNomeArquivo = "ArquivoLog.txt")
+        public static void Log(Nivel nivel, string strMensagem)
         {
             try
             {
-                caminhoExe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                string caminhoArquivo = Path.Combine(caminhoExe, strNomeArquivo);
+                string nomeExecutavel = System.AppDomain.CurrentDomain.FriendlyName;
+                //nomeExecutavel = nomeExecutavel.Split('.')[0];
+                string strNomeArquivo = "ArquivoLog.txt";
+                string caminhoPastaLog = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"EventLog");
+
+                string caminhoExe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                if (!Directory.Exists(caminhoPastaLog)) Directory.CreateDirectory(caminhoPastaLog);
+                string caminhoArquivo = Path.Combine(caminhoPastaLog, strNomeArquivo);
 
                 if (!File.Exists(caminhoArquivo))
                 {
@@ -32,23 +37,24 @@ namespace SRV_ConsomeAPI.Eventlog
                 {
                     AppendLog(strMensagem, w);
                 }
-
-                return true;
+                
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                RegistraLog.Log(Nivel.Erro, ex.Message);
+                Console.WriteLine(ex.Message);
             }
-        }
+        }        
 
         private static void AppendLog(string logMensagem, TextWriter txtWriter)
         {
             try
-            {
+            {                
                 txtWriter.Write(DateTime.Now + ": " + logMensagem + "\r\n");
             }
             catch (Exception ex)
             {
+                RegistraLog.Log(Nivel.Erro, ex.Message);
                 throw ex;
             }
         }

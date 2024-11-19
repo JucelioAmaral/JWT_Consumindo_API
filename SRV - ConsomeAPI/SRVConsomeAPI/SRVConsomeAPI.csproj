@@ -71,6 +71,7 @@
     <Compile Include="DebugsTestes\FormDebugsTestesServico.Designer.cs">
       <DependentUpon>FormDebugsTestesServico.cs</DependentUpon>
     </Compile>
+    <Compile Include="Eventlog\NivelEnums.cs" />
     <Compile Include="Eventlog\RegistraLog.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>

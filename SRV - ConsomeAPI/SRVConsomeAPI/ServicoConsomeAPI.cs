@@ -24,14 +24,14 @@ namespace SRVConsomeAPI
             try
             {
                 //EventLog.WriteEntry("Em OnStart. Serviço iniciando...", EventLogEntryType.Information);
-                RegistraLog.Log("Em OnStart. Serviço iniciando...");
+                RegistraLog.Log(NivelEnums.Nivel.Info,"Em OnStart. Serviço iniciando...");
                 clsControleProcessamento controle = new clsControleProcessamento();
                 controle.IniciarProcessamento();
             }
             catch (Exception e)
             {
                 //EventLog.WriteEntry("Exception em OnStart.", EventLogEntryType.Error);
-                RegistraLog.Log("Exception em OnStart." + e.Message);
+                RegistraLog.Log(NivelEnums.Nivel.Erro,"Exception em OnStart." + e.Message);
                 Console.WriteLine("OnStart: Erro ao IniciarProcessamento: " + e.Message);
             }
         }
@@ -41,12 +41,12 @@ namespace SRVConsomeAPI
             try
             {
                 //EventLog.WriteEntry("Em OnStop. Serviço finalizado.", EventLogEntryType.Information);
-                RegistraLog.Log("Em OnStop. Serviço finalizado.");
+                RegistraLog.Log(NivelEnums.Nivel.Info,"Em OnStop. Serviço finalizado.");
             }
             catch (Exception e)
             {
                 //EventLog.WriteEntry("Exception em OnStop.", EventLogEntryType.Error);
-                RegistraLog.Log("Exception em OnStop." + e.Message);
+                RegistraLog.Log(NivelEnums.Nivel.Erro,"Exception em OnStop." + e.Message);
                 Console.WriteLine("OnStart: Erro ao IniciarProcessamento: " + e.Message);
             }
         }

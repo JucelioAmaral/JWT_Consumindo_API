@@ -25,7 +25,7 @@ namespace DebugsTestes
         private void btnTestar_Click(object sender, EventArgs e)
         {
             SRVConsomeAPI.clsControleProcessamento c = new SRVConsomeAPI.clsControleProcessamento();
-            RegistraLog.Log("btnTestar_Click. Teste iniciando...");
+            RegistraLog.Log(NivelEnums.Nivel.Info,"btnTestar_Click. Teste iniciando...");
             c.IniciarProcessamento();
         }
     }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SRV_ConsomeAPI.Eventlog.NivelEnums;
 
 namespace SRVConsomeAPI.DebugsTestes
 {
@@ -19,9 +20,10 @@ namespace SRVConsomeAPI.DebugsTestes
         }
 
         private void btnTestarDiretoDaquiDoServico_Click(object sender, EventArgs e)
-        {
+        {            
+
             clsControleProcessamento c = new clsControleProcessamento();
-            RegistraLog.Log("btnTestarDiretoDaquiDoServico_Click. Teste iniciando...");
+            RegistraLog.Log(Nivel.Info,"btnTestarDiretoDaquiDoServico_Click. Teste iniciando...");
             c.IniciarProcessamento();
         }
     }
