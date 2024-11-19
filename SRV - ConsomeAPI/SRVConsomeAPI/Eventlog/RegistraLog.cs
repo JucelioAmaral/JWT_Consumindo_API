@@ -19,8 +19,8 @@ namespace SRV_ConsomeAPI.Eventlog
             try
             {
                 string nomeExecutavel = System.AppDomain.CurrentDomain.FriendlyName;
-                //nomeExecutavel = nomeExecutavel.Split('.')[0];
-                string strNomeArquivo = "ArquivoLog.txt";
+                nomeExecutavel = nomeExecutavel.Split('.')[0];
+                string strNomeArquivo = nomeExecutavel + "_" + DateTime.Now.ToString("ddMMyyyy") + ".txt";
                 string caminhoPastaLog = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"EventLog");
 
                 string caminhoExe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
