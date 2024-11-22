@@ -31,8 +31,7 @@ namespace SRVConsomeAPI
             catch (Exception e)
             {
                 //EventLog.WriteEntry("Exception em OnStart.", EventLogEntryType.Error);
-                RegistraLog.Log(NivelEnums.Nivel.Erro,"Exception em OnStart." + e.Message);
-                Console.WriteLine("OnStart: Erro ao IniciarProcessamento: " + e.Message);
+                RegistraLog.Log(NivelEnums.Nivel.Erro,"Exception em OnStart." + e.Message);                
             }
         }
 
@@ -46,8 +45,7 @@ namespace SRVConsomeAPI
             catch (Exception e)
             {
                 //EventLog.WriteEntry("Exception em OnStop.", EventLogEntryType.Error);
-                RegistraLog.Log(NivelEnums.Nivel.Erro,"Exception em OnStop." + e.Message);
-                Console.WriteLine("OnStart: Erro ao IniciarProcessamento: " + e.Message);
+                RegistraLog.Log(NivelEnums.Nivel.Erro,"Exception em OnStop." + e.Message);                
             }
         }
     }

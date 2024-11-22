@@ -35,22 +35,21 @@ namespace SRV_ConsomeAPI.Eventlog
 
                 using (StreamWriter w = File.AppendText(caminhoArquivo))
                 {
-                    AppendLog(strMensagem, w);
+                    AppendLog(nivel,strMensagem, w);
                 }
                 
             }
             catch (Exception ex)
             {
-                RegistraLog.Log(Nivel.Erro, ex.Message);
-                Console.WriteLine(ex.Message);
+                RegistraLog.Log(Nivel.Erro, ex.Message);                
             }
         }        
 
-        private static void AppendLog(string logMensagem, TextWriter txtWriter)
+        private static void AppendLog(Nivel nivel, string logMensagem, TextWriter txtWriter)
         {
             try
             {                
-                txtWriter.Write(DateTime.Now + ": " + logMensagem + "\r\n");
+                txtWriter.Write(DateTime.Now.ToString("HH:mm:ss:fff") + " - " + Enum.GetName(typeof(Nivel), nivel) +": " + logMensagem + "\r\n");
             }
             catch (Exception ex)
             {

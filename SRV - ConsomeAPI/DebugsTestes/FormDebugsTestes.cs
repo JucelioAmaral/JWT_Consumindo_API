@@ -22,11 +22,12 @@ namespace DebugsTestes
             InitializeComponent();
         }
 
+        [Obsolete]
         private void btnTestar_Click(object sender, EventArgs e)
         {
-            SRVConsomeAPI.clsControleProcessamento c = new SRVConsomeAPI.clsControleProcessamento();
+            SRVConsomeAPI.AutenticarCosumidor a = new SRVConsomeAPI.AutenticarCosumidor();
             RegistraLog.Log(NivelEnums.Nivel.Info,"btnTestar_Click. Teste iniciando...");
-            c.IniciarProcessamento();
+            a.AutenticaConsumidorNaApi();
         }
     }
 }

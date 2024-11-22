@@ -1,4 +1,5 @@
-﻿using SRV_ConsomeAPI.Eventlog;
+﻿using SRV_ConsomeAPI;
+using SRV_ConsomeAPI.Eventlog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,12 +20,13 @@ namespace SRVConsomeAPI.DebugsTestes
             InitializeComponent();
         }
 
+        [Obsolete]
         private void btnTestarDiretoDaquiDoServico_Click(object sender, EventArgs e)
-        {            
+        {
 
-            clsControleProcessamento c = new clsControleProcessamento();
+            AutenticarCosumidor a = new AutenticarCosumidor();
             RegistraLog.Log(Nivel.Info,"btnTestarDiretoDaquiDoServico_Click. Teste iniciando...");
-            c.IniciarProcessamento();
+            a.AutenticaConsumidorNaApi();
         }
     }
 }

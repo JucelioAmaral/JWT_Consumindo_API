@@ -1,31 +1,50 @@
-﻿using System;
-using System.ServiceModel;
-
+﻿using SRV_ConsomeAPI;
+using SRV_ConsomeAPI.Eventlog;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using static SRV_ConsomeAPI.Eventlog.NivelEnums;
 
 namespace SRVConsomeAPI
 {
-    [ServiceBehavior(Name = "SRVConsomeAPI", InstanceContextMode = InstanceContextMode.Single)]
 
     public class clsControleProcessamento
     {
+        Thread threadColetaLog;
+        private static List<Thread> listaThreads = new List<Thread>();
+
+        [Obsolete]
         public void IniciarProcessamento()
         {
             try
             {
-                Console.WriteLine("IniciarProcessamento");                
-                //ThreadStart start = new ThreadStart(checkEmails.VerificarEmailsPendentes);
-                //threadVerificacao = new Thread(start);
-                //threadVerificacao.Start();
+                RegistraLog.Log(Nivel.Info, "IniciarProcessamento: Iniciando processamento...");                
+                AutenticarCosumidor autentica = new AutenticarCosumidor();
+                ThreadStart start = new ThreadStart(autentica.AutenticaConsumidorNaApi);
+                threadColetaLog = new Thread(start);
+                threadColetaLog.Start();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine("OnStart: Erro ao IniciarProcessamento: " + e.Message);
+                RegistraLog.Log(Nivel.Erro,"OnStart: Erro ao IniciarProcessamento: " + ex.Message);                
             }            
 
         }
 
         public void FinalizarProcessamento()
         {
+            try
+            {
+                foreach (Thread thread in listaThreads)
+                {
+                    thread.Abort();
+                }
+                RegistraLog.Log(Nivel.Info, "FinalizarProcessamento: Finalizando processamento...");                
+            }
+            catch (Exception ex)
+            {
+                RegistraLog.Log(Nivel.Erro, "FinalizarProcessamento: Exception: " + ex.Message);
+            }
         }
     }
 }
