@@ -103,6 +103,8 @@
     <Compile Include="Eventlog\NivelEnums.cs" />
     <Compile Include="Eventlog\RegistraLog.cs" />
     <Compile Include="JWT\Token.cs" />
+    <Compile Include="Model\Equipamento.cs" />
+    <Compile Include="Model\Global.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
     </Compile>

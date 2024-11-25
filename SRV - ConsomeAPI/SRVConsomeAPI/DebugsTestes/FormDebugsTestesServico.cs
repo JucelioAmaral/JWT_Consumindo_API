@@ -1,13 +1,7 @@
 ﻿using SRV_ConsomeAPI;
 using SRV_ConsomeAPI.Eventlog;
+using SRV_ConsomeAPI.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SRV_ConsomeAPI.Eventlog.NivelEnums;
 
@@ -15,6 +9,8 @@ namespace SRVConsomeAPI.DebugsTestes
 {
     public partial class FormDebugsTestesServico : Form
     {
+        AutenticarCosumidor a = new AutenticarCosumidor();        
+
         public FormDebugsTestesServico()
         {
             InitializeComponent();
@@ -23,10 +19,16 @@ namespace SRVConsomeAPI.DebugsTestes
         [Obsolete]
         private void btnTestarDiretoDaquiDoServico_Click(object sender, EventArgs e)
         {
-
-            AutenticarCosumidor a = new AutenticarCosumidor();
-            RegistraLog.Log(Nivel.Info,"btnTestarDiretoDaquiDoServico_Click. Teste iniciando...");
-            a.AutenticaConsumidorNaApi();
+            try
+            {
+                RegistraLog.Log(Nivel.Info, "btnTestarDiretoDaquiDoServico_Click. Teste iniciando...");
+                a.AutenticaConsumidorNaApi();
+                dgvEquipamentos.DataSource = Global.equipamentos;
+            }
+            catch (Exception ex)
+            {
+                RegistraLog.Log(Nivel.Erro, "btnTestarDiretoDaquiDoServico_Click. Exception: " + ex.Message);
+            }
         }
     }
 }
