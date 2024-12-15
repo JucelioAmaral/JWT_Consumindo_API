@@ -13,7 +13,6 @@ namespace SRVConsomeAPI
         Thread threadColetaLog;
         private static List<Thread> listaThreads = new List<Thread>();
 
-        [Obsolete]
         public void IniciarProcessamento()
         {
             try

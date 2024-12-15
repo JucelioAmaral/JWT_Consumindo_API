@@ -22,7 +22,6 @@ namespace DebugsTestes
             InitializeComponent();
         }
 
-        [Obsolete]
         private void btnTestar_Click(object sender, EventArgs e)
         {
             SRVConsomeAPI.AutenticarCosumidor a = new SRVConsomeAPI.AutenticarCosumidor();

@@ -14,5 +14,12 @@ namespace SRV_ConsomeAPI.Model
             get => _equipamentos;
             set => _equipamentos = value;
         }
+
+        private static string _statusConexaoAPI;
+        public static string statusConexaoAPI  // read-write instance property
+        {
+            get => _statusConexaoAPI;
+            set => _statusConexaoAPI = value;
+        }
     }
 }

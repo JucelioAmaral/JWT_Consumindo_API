@@ -1,13 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SRV_ConsomeAPI.Eventlog;
 using SRV_ConsomeAPI.JWT;
+using SRV_ConsomeAPI.Model;
 using SRV_ConsomeAPI.WebAPI_Equipamentos;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -28,12 +25,11 @@ namespace SRVConsomeAPI
         /// <summary>
         /// Autentica Consumidor Na Api
         /// </summary>
-        [Obsolete]
         public void AutenticaConsumidorNaApi()
         {
             RegistraLog.Log(Nivel.Info, "AutenticaConsumidorNaApi: Iniciando...");
             _urlBase = ConfigurationSettings.AppSettings["UrlBase"];
-            RegistraLog.Log(Nivel.Info, "AutenticaConsumidorNaApi: _urlBase= " + _urlBase);
+            RegistraLog.Log(Nivel.Info, "AutenticaConsumidorNaApi: urlBase= " + _urlBase);
 
             try
             {
@@ -65,12 +61,14 @@ namespace SRVConsomeAPI
 
                             consome.ObtemEquipamentosNaApi(_urlBase, client);
                         }
+                        Global.statusConexaoAPI =  "Conectado na API: " + _urlBase;
                         RegistraLog.Log(Nivel.Info, "AutenticaConsumidorNaApi: Finalizada.");                                             
                     }
                 }
             }
             catch (Exception ex)
             {
+                Global.statusConexaoAPI = "Erro ao autenticar com a API";
                 RegistraLog.Log(Nivel.Erro, "AutenticaConsumidorNaApi: Exception= " + ex.Message);
             }
         }
