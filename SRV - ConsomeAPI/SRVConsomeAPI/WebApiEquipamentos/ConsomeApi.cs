@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using SRV_ConsomeAPI.Eventlog;
+using SRV_ConsomeAPI.JWT;
 using SRV_ConsomeAPI.Model;
 using SRVConsomeAPI.DebugsTestes;
 using System;
@@ -7,15 +8,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using static SRV_ConsomeAPI.Eventlog.NivelEnums;
 
-namespace SRV_ConsomeAPI.WebAPI_Equipamentos
+namespace SRV_ConsomeAPI.WebApiEquipamentos
 {
     public class ConsomeApi
     {
-        //List<Equipamento> equipamentosLista = new List<Equipamento>();
+        public void ConsomeDadosNaApi(string urlBase, HttpResponseMessage respostaToken)
+        {
+            try
+            {
+                RegistraLog.Log(Nivel.Info, "ConsomeDadosNaApi: Iniciando...");
+                using (var client = new HttpClient())
+                {
+                    RegistraLog.Log(Nivel.Info, "ConsomeDadosNaApi: StatusCode= " + respostaToken.StatusCode);
+                    Token token = JsonConvert.DeserializeObject<Token>(respostaToken.Content.ReadAsStringAsync().Result);
+                    if (token.Authenticated)
+                    {
+                        client.DefaultRequestHeaders.Authorization =
+                            new AuthenticationHeaderValue("Bearer", token.AccessToken);
+
+                        ObtemEquipamentosNaApi(urlBase, client);
+                    }
+                    RegistraLog.Log(Nivel.Info, "ConsomeDadosNaApi: Finalizada.");
+                }
+            }
+            catch (Exception ex)
+            {
+                RegistraLog.Log(Nivel.Erro, "ConsomeDadosNaApi: Exception= " + ex.Message);
+            }
+        }
 
         public void ObtemEquipamentosNaApi(string url, HttpClient client)
         {
@@ -23,9 +48,7 @@ namespace SRV_ConsomeAPI.WebAPI_Equipamentos
             {
                 RegistraLog.Log(Nivel.Info, "ObtemEquipamentosNaApi...");
                 HttpResponseMessage response = client.GetAsync(
-                    url + "equipamento/BuscaEquipamentosStatus").Result;
-
-                RegistraLog.Log(Nivel.Info, "ObtemEquipamentosNaApi:StatusCode= " + response.StatusCode);
+                    url + "equipamento/BuscaEquipamentosStatus").Result;                
                 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {

@@ -119,7 +119,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebAPI Equipamentos\ConsomeApi.cs" />
+    <Compile Include="WebApiEquipamentos\ConsomeApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

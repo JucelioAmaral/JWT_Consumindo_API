@@ -19,7 +19,7 @@ namespace SRVConsomeAPI
             {
                 RegistraLog.Log(Nivel.Info, "IniciarProcessamento: Iniciando processamento...");                
                 AutenticarCosumidor autentica = new AutenticarCosumidor();
-                ThreadStart start = new ThreadStart(autentica.AutenticaConsumidorNaApi);
+                ThreadStart start = new ThreadStart(autentica.AutenticaConsumidorApi);
                 threadColetaLog = new Thread(start);
                 threadColetaLog.Start();
             }

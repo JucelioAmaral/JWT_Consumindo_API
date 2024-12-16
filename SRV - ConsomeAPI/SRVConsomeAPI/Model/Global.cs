@@ -21,5 +21,13 @@ namespace SRV_ConsomeAPI.Model
             get => _statusConexaoAPI;
             set => _statusConexaoAPI = value;
         }
+
+        private static bool _autenticado;
+        public static bool autenticado  // read-write instance property
+        {
+            get => _autenticado;
+            set => _autenticado = value;
+        }
+        
     }
 }

@@ -26,7 +26,7 @@ namespace DebugsTestes
         {
             SRVConsomeAPI.AutenticarCosumidor a = new SRVConsomeAPI.AutenticarCosumidor();
             RegistraLog.Log(NivelEnums.Nivel.Info,"btnTestar_Click. Teste iniciando...");
-            a.AutenticaConsumidorNaApi();
+            a.AutenticaConsumidorApi();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace SRVConsomeAPI.DebugsTestes
 {
     public partial class FormDebugsTestesServico : Form
     {
-        AutenticarCosumidor a = new AutenticarCosumidor();        
+        AutenticarCosumidor a = new AutenticarCosumidor();
 
         public FormDebugsTestesServico()
         {
@@ -19,23 +19,32 @@ namespace SRVConsomeAPI.DebugsTestes
         private void btnTestarDiretoDaquiDoServico_Click(object sender, EventArgs e)
         {
             try
-            {                
-                RegistraLog.Log(Nivel.Info, "btnTestarDiretoDaquiDoServico_Click. Teste iniciando...");
-                a.AutenticaConsumidorNaApi();
+            {
+                RegistraLog.Log(Nivel.Acao, "btnTestarDiretoDaquiDoServico_Click. Teste iniciando...");
+                a.AutenticaConsumidorApi();
                 txtStatusConexao.Text = Global.statusConexaoAPI;
                 dgvEquipamentos.DataSource = Global.equipamentos;
             }
             catch (Exception ex)
             {
-                RegistraLog.Log(Nivel.Erro, "btnTestarDiretoDaquiDoServico_Click. Exception: " + ex.Message);
+                RegistraLog.Log(Nivel.Acao, "btnTestarDiretoDaquiDoServico_Click. Exception: " + ex.Message);
             }
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
-            txtStatusConexao.Text = string.Empty;
-            Global.statusConexaoAPI = string.Empty;
-            dgvEquipamentos.DataSource = null;
+            try
+            {
+                RegistraLog.Log(Nivel.Acao, "btnLimpar_Click. Limpando...");
+                txtStatusConexao.Text = string.Empty;
+                Global.statusConexaoAPI = string.Empty;
+                Global.autenticado = false;
+                dgvEquipamentos.DataSource = null;
+            }
+            catch (Exception ex)
+            {
+                RegistraLog.Log(Nivel.Acao, "btnLimpar_Click. Exception: " + ex.Message);
+            }
         }
     }
 }
