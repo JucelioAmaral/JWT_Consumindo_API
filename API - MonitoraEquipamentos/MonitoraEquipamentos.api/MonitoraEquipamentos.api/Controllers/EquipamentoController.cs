@@ -18,12 +18,14 @@ namespace MonitoraEquipamentos.api.Controllers
         {
             _equipService = anuncioService;
         }
-
+        /// <summary>
+        /// Busca todos os equipamentos para a requisição feita pelo serviço windows/console/windows form. NÃO APAGAR, SÃO DIFERENTES!!
+        /// </summary>
+        /// <returns></returns>
         [Authorize("Bearer")]        
         [HttpGet("BuscaEquipamentosStatus")]
-        public object GetBuscaEquipamentosStatus()
-        {
-            //Busca todos os equipamentos para o serviço windows/console/windows form
+        public object ObtemEquipamentosStatus()
+        {            
             try
             {
                 var equip = _equipService.GetAllEquipamentos().Result;
@@ -38,7 +40,10 @@ namespace MonitoraEquipamentos.api.Controllers
                     $"Erro ao tentar buscar Equipamentos. Erro: {ex.Message}");
             }
         }
-
+        /// <summary>
+        /// Busca todos os equipamentos para api documentada com o swagger. NÃO APAGAR, SÃO DIFERENTES!!
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("BuscaEquipamentos")]
         public async Task<IActionResult> BuscaEquipamentos()
         {
