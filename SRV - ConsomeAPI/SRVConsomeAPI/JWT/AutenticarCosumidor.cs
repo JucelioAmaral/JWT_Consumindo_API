@@ -61,7 +61,7 @@ namespace SRVConsomeAPI
                     try
                     {
                         respToken = client.PostAsync( // Post para autenticar primeiramente.
-                            _urlBase + "login", new StringContent(
+                            _urlBase + "/api/login", new StringContent(
                                 JsonConvert.SerializeObject(new
                                 {
                                     UserID = ConfigurationSettings.AppSettings["UserID"], // Este usuário está no appsettings.json desse projeto

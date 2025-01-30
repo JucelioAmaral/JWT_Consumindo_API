@@ -48,7 +48,7 @@ namespace SRV_ConsomeAPI.WebApiEquipamentos
             {
                 RegistraLog.Log(Nivel.Info, "ObtemEquipamentosNaApi...");
                 HttpResponseMessage response = client.GetAsync(
-                    url + "equipamento/BuscaEquipamentosStatus").Result;                
+                    url + "/api/equipamento/BuscaEquipamentosStatus").Result;                
                 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
