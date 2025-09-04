@@ -106,7 +106,8 @@ namespace MonitoraEquipamentos.api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MonitoraEquipamentos.api v1"));
+                // Adicionar dois pontos (..) antes do "/swagger/v1/swagger.json" é a solução para ser possível usar como adição de aplicação no IIS
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("../swagger/v1/swagger.json", "MonitoraEquipamentos.api v1"));
             }
 
             //app.UseHttpsRedirection();// Redireciona o trafego HTTP para HTTPS:
